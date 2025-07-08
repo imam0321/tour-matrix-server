@@ -18,3 +18,9 @@ npm install --save-dev eslint @eslint/js typescript typescript-eslint
 
 "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts"
 ```
+
+package :
+1. httpStatus 
+ npm i http-status-codes
+ 
+
