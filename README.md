@@ -22,5 +22,8 @@ npm install --save-dev eslint @eslint/js typescript typescript-eslint
 package :
 1. httpStatus 
  npm i http-status-codes
+2. bcryptjs
+ npm i bcryptjs
+ npm i -D @types/bcryptjs
  
 
