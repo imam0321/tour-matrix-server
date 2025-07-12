@@ -25,5 +25,8 @@ package :
 2. bcryptjs
  npm i bcryptjs
  npm i -D @types/bcryptjs
+3. cookie parser
+  npm i cookie-parser
+  npm i -D @types/cookie-parser
  
 
