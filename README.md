@@ -25,5 +25,12 @@ package :
 2. bcryptjs
  npm i bcryptjs
  npm i -D @types/bcryptjs
- 
-
+3. cookie parser
+  npm i cookie-parser
+  npm i -D @types/cookie-parser
+4. Passport.js
+  npm i passport passport-local passport-google-oauth20
+  npm i -D @types/passport @types/passport-local @types/passport-google-oauth20
+4. Express session
+  npm i express-session
+  npm i -D @types/express-session

@@ -3,6 +3,11 @@ import { NextFunction, Request, Response } from "express";
 import { AuthServices } from "./auth.service";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status-codes";
+import AppError from "../../errorHelpers/AppError";
+import { setAuthCookie } from "../../utils/setCookies";
+import { JwtPayload } from "jsonwebtoken";
+import { createUserTokens } from "../../utils/userTokens";
+import { envVars } from "../../config/env";
 
 const credentialLogin = async (
   req: Request,
@@ -10,6 +15,8 @@ const credentialLogin = async (
   next: NextFunction
 ) => {
   const loginInfo = await AuthServices.credentialLogin(req.body);
+
+  setAuthCookie(res, loginInfo);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -19,6 +26,101 @@ const credentialLogin = async (
   });
 };
 
+const getNewAccessToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const refreshToken = req.cookies.refreshToken;
+
+  if (!refreshToken) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Refresh Token Not Found");
+  }
+
+  const tokenInfo = await AuthServices.getNewAccessToken(
+    refreshToken as string
+  );
+
+  setAuthCookie(res, tokenInfo);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "New Access Token Retried Successfully",
+    data: tokenInfo,
+  });
+};
+
+const resetPassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const decodedToken = req.user;
+  const oldPassword = req.body.oldPassword;
+  const newPassword = req.body.newPassword;
+
+  await AuthServices.resetPassword(
+    decodedToken as JwtPayload,
+    oldPassword,
+    newPassword
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Password Changed Successfully",
+    data: null,
+  });
+};
+
+const logout = async (req: Request, res: Response, next: NextFunction) => {
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+  });
+
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User logged out Successfully",
+    data: null,
+  });
+};
+
+const googleCallbackController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  let redirectTo = req.query.state ? (req.query.state as string) : "";
+  if (redirectTo.startsWith("/")) {
+    redirectTo = redirectTo.slice(1);
+  }
+  const user = req.user;
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  const tokenInfo = createUserTokens(user);
+
+  setAuthCookie(res, tokenInfo);
+
+  res.redirect(`${envVars.FRONTEND_URL}/${redirectTo}`);
+};
+
 export const AuthController = {
   credentialLogin,
+  googleCallbackController,
+  getNewAccessToken,
+  resetPassword,
+  logout,
 };
