@@ -4,8 +4,6 @@ import httpStatus from "http-status-codes";
 import { UserServices } from "./user.service";
 import catchAsync from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
-import { verifyToken } from "../../utils/jwt";
-import { envVars } from "../../config/env";
 import { JwtPayload } from "jsonwebtoken";
 
 export const userRouter = express.Router();
@@ -31,7 +29,7 @@ const updateUser = catchAsync(
     // const token = req.headers.authorization;
     // const verifiedToken = verifyToken(token as string, envVars.JWT_ACCESS_SECRET) as JwtPayload;
 
-    const user = await UserServices.updateUser(userId, payload, verifiedToken);
+    const user = await UserServices.updateUser(userId, payload, verifiedToken as JwtPayload);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
