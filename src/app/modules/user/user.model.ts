@@ -13,12 +13,12 @@ const userSchema = new Schema<IUser>(
   {
     name: {
       type: String,
-      required: [true, "Name is required."],
+      required: true,
     },
     email: {
       type: String,
-      unique: [true, "Email must be unique."],
-      required: [true, "Email is required."],
+      unique: true,
+      required: true,
     },
     password: {
       type: String,
