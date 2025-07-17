@@ -89,7 +89,7 @@ const deleteDivision = async (id: string) => {
   return null;
 };
 
-export const DivisionServices = {
+export const DivisionService = {
   createDivision,
   getAllDivision,
   getSingleDivision,

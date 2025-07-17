@@ -43,7 +43,7 @@ const resetPassword = async (
   user!.save();
 };
 
-export const AuthServices = {
+export const AuthService = {
   getNewAccessToken,
   resetPassword,
 };

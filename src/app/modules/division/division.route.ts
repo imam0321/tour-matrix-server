@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { DivisionControllers } from "./division.controller";
+import { DivisionController } from "./division.controller";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { Role } from "../user/user.interface";
 import {
@@ -14,20 +14,20 @@ router.post(
   "/create",
   checkAuth(Role.SUPER_ADMIN, Role.ADMIN),
   validateRequest(createDivisionSchema),
-  DivisionControllers.createDivision
+  DivisionController.createDivision
 );
-router.get("/", DivisionControllers.getAllDivision);
-router.get("/:slug", DivisionControllers.getSingleDivision);
+router.get("/", DivisionController.getAllDivision);
+router.get("/:slug", DivisionController.getSingleDivision);
 router.patch(
   "/:id",
   checkAuth(Role.SUPER_ADMIN, Role.ADMIN),
   validateRequest(updateDivisionSchema),
-  DivisionControllers.updateDivision
+  DivisionController.updateDivision
 );
 router.delete(
   "/:id",
   checkAuth(Role.SUPER_ADMIN, Role.ADMIN),
-  DivisionControllers.deleteDivision
+  DivisionController.deleteDivision
 );
 
 export const DivisionRoutes = router;

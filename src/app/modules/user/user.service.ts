@@ -104,7 +104,7 @@ const getAllUsers = async () => {
   };
 };
 
-export const UserServices = {
+export const UserService = {
   createUser,
   getAllUsers,
   updateUser,

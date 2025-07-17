@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import catchAsync from "../../utils/catchAsync";
 import { NextFunction, Request, Response } from "express";
-import { DivisionServices } from "./division.service";
+import { DivisionService } from "./division.service";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status-codes";
 
 const createDivision = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = await DivisionServices.createDivision(req.body);
+    const result = await DivisionService.createDivision(req.body);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
@@ -20,7 +20,7 @@ const createDivision = catchAsync(
 
 const getAllDivision = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = await DivisionServices.getAllDivision();
+    const result = await DivisionService.getAllDivision();
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -35,7 +35,7 @@ const getAllDivision = catchAsync(
 const getSingleDivision = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const slug = req.params.slug;
-    const result = await DivisionServices.getSingleDivision(slug);
+    const result = await DivisionService.getSingleDivision(slug);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -49,7 +49,7 @@ const getSingleDivision = catchAsync(
 const updateDivision = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
-    const result = await DivisionServices.updateDivision(id, req.body);
+    const result = await DivisionService.updateDivision(id, req.body);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
@@ -62,7 +62,7 @@ const updateDivision = catchAsync(
 
 const deleteDivision = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = await DivisionServices.deleteDivision(req.params.id);
+    const result = await DivisionService.deleteDivision(req.params.id);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -73,7 +73,7 @@ const deleteDivision = catchAsync(
   }
 );
 
-export const DivisionControllers = {
+export const DivisionController = {
   createDivision,
   getAllDivision,
   getSingleDivision,

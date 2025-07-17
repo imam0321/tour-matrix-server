@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { TourControllers } from "./tour.controller";
+import { TourController } from "./tour.controller";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { Role } from "../user/user.interface";
 import { validateRequest } from "../../middlewares/validateRequest";
@@ -16,21 +16,21 @@ router.post(
   "/create-tour-type",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
   validateRequest(createTourTypeZodSchema),
-  TourControllers.createTourType
+  TourController.createTourType
 );
-router.get("/tour-types", TourControllers.getAllTourTypes);
+router.get("/tour-types", TourController.getAllTourTypes);
 
 router.patch(
   "/tour-types/:id",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
   validateRequest(createTourTypeZodSchema),
-  TourControllers.updateTourType
+  TourController.updateTourType
 );
 
 router.delete(
   "/tour-types/:id",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
-  TourControllers.deleteTourType
+  TourController.deleteTourType
 );
 
 // Tour Routes
@@ -38,22 +38,22 @@ router.post(
   "/create",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
   validateRequest(createTourZodSchema),
-  TourControllers.createTour
+  TourController.createTour
 );
 
-router.get("/", TourControllers.getAllTours);
+router.get("/", TourController.getAllTours);
 
 router.patch(
   "/:id",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
   validateRequest(updateTourZodSchema),
-  TourControllers.updateTour
+  TourController.updateTour
 );
 
 router.delete(
   "/:id",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
-  TourControllers.deleteTour
+  TourController.deleteTour
 );
 
 export const TourRoutes = router;
