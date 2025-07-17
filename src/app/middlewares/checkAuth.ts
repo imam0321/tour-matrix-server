@@ -34,7 +34,7 @@ export const checkAuth =
       ) {
         throw new AppError(
           httpStatus.BAD_REQUEST,
-          `User Not ${isUserExist.isActive}!`
+          `User ${isUserExist.isActive}!`
         );
       }
 
