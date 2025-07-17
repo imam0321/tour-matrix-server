@@ -63,10 +63,50 @@ const createTour = catchAsync(
   }
 );
 
+const getAllTours = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await TourServices.getAllTours();
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Tours retrieved successfully",
+      data: result.data,
+      meta: result.meta,
+    });
+  }
+);
+
+const updateTour = catchAsync(async (req: Request, res: Response) => {
+  const result = await TourServices.updateTour(req.params.id, req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Tour updated successfully",
+    data: result,
+  });
+});
+
+const deleteTour = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await TourServices.deleteTour(id);
+  
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Tour deleted successfully",
+    data: result,
+  });
+});
+
 export const TourControllers = {
   createTourType,
   getAllTourTypes,
   updateTourType,
   deleteTourType,
   createTour,
+  getAllTours,
+  updateTour,
+  deleteTour,
 };

@@ -61,10 +61,53 @@ const createTour = async (payload: ITour) => {
   return tour;
 };
 
+const getAllTours = async () => {
+  const tours = await Tour.find({});
+  const totalTour = await Tour.countDocuments();
+
+  return {
+    data: tours,
+    meta: {
+      total: totalTour,
+    },
+  };
+};
+
+const updateTour = async (id: string, payload: Partial<ITour>) => {
+  const existingTour = await Tour.findById(id);
+
+  if (!existingTour) {
+    throw new AppError(httpStatus.NOT_FOUND, "Tour not found.");
+  }
+
+  if (payload.title) {
+    const baseSlug = payload.title.toLowerCase().split(" ").join("-");
+    let slug = `${baseSlug}`;
+
+    let counter = 0;
+    while (await Tour.exists({ slug })) {
+      slug = `${slug}-${counter++}`;
+    }
+
+    payload.slug = slug;
+  }
+
+  const updatedTour = await Tour.findByIdAndUpdate(id, payload, { new: true });
+
+  return updatedTour;
+};
+
+const deleteTour = async (id: string) => {
+  return await Tour.findByIdAndDelete(id);
+};
+
 export const TourServices = {
   createTourType,
   getAllTourTypes,
   updateTourType,
   deleteTourType,
   createTour,
+  getAllTours,
+  updateTour,
+  deleteTour,
 };
