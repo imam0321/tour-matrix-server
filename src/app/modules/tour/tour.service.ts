@@ -46,16 +46,6 @@ const createTour = async (payload: ITour) => {
     );
   }
 
-  const baseSlug = payload.title.toLowerCase().split(" ").join("-");
-  let slug = `${baseSlug}`;
-
-  let counter = 0;
-  while (await Tour.exists({ slug })) {
-    slug = `${slug}-${counter++}`;
-  }
-
-  payload.slug = slug;
-
   const tour = await Tour.create(payload);
 
   return tour;
@@ -78,18 +68,6 @@ const updateTour = async (id: string, payload: Partial<ITour>) => {
 
   if (!existingTour) {
     throw new AppError(httpStatus.NOT_FOUND, "Tour not found.");
-  }
-
-  if (payload.title) {
-    const baseSlug = payload.title.toLowerCase().split(" ").join("-");
-    let slug = `${baseSlug}`;
-
-    let counter = 0;
-    while (await Tour.exists({ slug })) {
-      slug = `${slug}-${counter++}`;
-    }
-
-    payload.slug = slug;
   }
 
   const updatedTour = await Tour.findByIdAndUpdate(id, payload, { new: true });
