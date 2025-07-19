@@ -4,18 +4,57 @@ import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status-codes";
 
-const createPayment = catchAsync(
+const initPayment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const result = {};
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
-      message: "Payment Created",
+      message: "",
+      data: result,
+    });
+  }
+);
+
+const successPayment = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = {};
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "",
+      data: result,
+    });
+  }
+);
+
+const failPayment = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = {};
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "",
+      data: result,
+    });
+  }
+);
+
+const cancelPayment = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = {};
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "",
       data: result,
     });
   }
 );
 
 export const PaymentController = {
-  createPayment,
+  initPayment,
+  successPayment,
+  failPayment,
+  cancelPayment,
 };
