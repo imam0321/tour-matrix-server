@@ -8,11 +8,13 @@ import { envVars } from "../../config/env";
 
 const initPayment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = {};
+    const bookingId = req.params.bookingId;
+    const result = await PaymentService.initPayment(bookingId);
+
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
-      message: "",
+      message: "Payment done Successfully",
       data: result,
     });
   }
@@ -21,7 +23,7 @@ const initPayment = catchAsync(
 const successPayment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const query = req.query;
-    const result = await PaymentService.createPayment(
+    const result = await PaymentService.successPayment(
       query as Record<string, string>
     );
 
@@ -35,25 +37,31 @@ const successPayment = catchAsync(
 
 const failPayment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = {};
-    sendResponse(res, {
-      statusCode: httpStatus.CREATED,
-      success: true,
-      message: "",
-      data: result,
-    });
+    const query = req.query;
+    const result = await PaymentService.failPayment(
+      query as Record<string, string>
+    );
+
+    if (!result.success) {
+      res.redirect(
+        `${envVars.SSL.SSL_FAIL_FRONTEND_URL}?transactionId=${query.transactionId}&message=${result.message}&amount=${query.amount}&status=${query.status}`
+      );
+    }
   }
 );
 
 const cancelPayment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = {};
-    sendResponse(res, {
-      statusCode: httpStatus.CREATED,
-      success: true,
-      message: "",
-      data: result,
-    });
+    const query = req.query;
+    const result = await PaymentService.cancelPayment(
+      query as Record<string, string>
+    );
+
+    if (!result.success) {
+      res.redirect(
+        `${envVars.SSL.SSL_CANCEL_FRONTEND_URL}?transactionId=${query.transactionId}&message=${result.message}&amount=${query.amount}&status=${query.status}`
+      );
+    }
   }
 );
 
