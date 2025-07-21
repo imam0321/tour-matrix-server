@@ -31,6 +31,8 @@ package :
 4. Passport.js
   npm i passport passport-local passport-google-oauth20
   npm i -D @types/passport @types/passport-local @types/passport-google-oauth20
-4. Express session
+5. Express session
   npm i express-session
   npm i -D @types/express-session
+6. Axios
+  npm i axios
