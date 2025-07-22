@@ -36,3 +36,10 @@ package :
   npm i -D @types/express-session
 6. Axios
   npm i axios
+7. Multer
+  npm i multer 
+  npm install --save @types/multer
+8. Cloudinary
+  npm i cloudinary
+9. Multer Storage Cloudinary
+  npm i multer-storage-cloudinary or  npm i multer-storage-cloudinary --force
