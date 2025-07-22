@@ -25,12 +25,13 @@ const createBooking = catchAsync(
 
 const getAllBookings = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = {};
+    const result = await BookingService.getAllBookings();
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
-      message: "Booking Created",
-      data: result,
+      message: "Bookings Retrieved",
+      data: result.data,
+      meta: result.meta,
     });
   }
 );
@@ -41,7 +42,7 @@ const getUserBookings = catchAsync(
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
-      message: "Booking Created",
+      message: "Bookings Retrieved",
       data: result,
     });
   }
@@ -49,11 +50,11 @@ const getUserBookings = catchAsync(
 
 const getSingleBooking = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = {};
+    const result = await BookingService.getSingleBooking(req.params.bookingId);
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
-      message: "Booking Created",
+      message: "Single Booking Retrieved",
       data: result,
     });
   }

@@ -106,9 +106,15 @@ const createBooking = async (payload: Partial<IBooking>, userId: string) => {
 };
 
 const getAllBookings = async () => {
-  const booking = {};
+  const booking = await Booking.find();
+  const totalBooking = await Booking.countDocuments();
 
-  return booking;
+  return {
+    data: booking,
+    meta: {
+      totalDocument: totalBooking,
+    },
+  };
 };
 
 const getUserBookings = async () => {
@@ -117,9 +123,8 @@ const getUserBookings = async () => {
   return booking;
 };
 
-const getSingleBooking = async () => {
-  const booking = {};
-
+const getSingleBooking = async (bookingId: string) => {
+  const booking = await Booking.findById(bookingId);
   return booking;
 };
 
