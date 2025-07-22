@@ -35,7 +35,7 @@ const getAllDivision = async () => {
   return {
     data: division,
     meta: {
-      total: totalDivision,
+      totalDocument: totalDivision,
     },
   };
 };
