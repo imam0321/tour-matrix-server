@@ -107,7 +107,7 @@ const setPassword = catchAsync(
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Password Changed Successfully",
+      message: "Password set Successfully",
       data: null,
     });
   }
