@@ -5,12 +5,17 @@ import { UserService } from "./user.service";
 import catchAsync from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { JwtPayload } from "jsonwebtoken";
+import { IUser } from "./user.interface";
 
 export const userRouter = express.Router();
 
 const createUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await UserService.createUser(req.body);
+    const payload: IUser = {
+      ...req.body,
+      picture: req.file?.path,
+    };
+    const user = await UserService.createUser(payload);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
@@ -24,12 +29,19 @@ const createUser = catchAsync(
 const updateUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    const payload = req.body;
+    const payload: IUser = {
+      ...req.body,
+      picture: req.file?.path,
+    };
     const verifiedToken = req.user;
     // const token = req.headers.authorization;
     // const verifiedToken = verifyToken(token as string, envVars.JWT_ACCESS_SECRET) as JwtPayload;
 
-    const user = await UserService.updateUser(userId, payload, verifiedToken as JwtPayload);
+    const user = await UserService.updateUser(
+      userId,
+      payload,
+      verifiedToken as JwtPayload
+    );
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,

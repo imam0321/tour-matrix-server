@@ -5,6 +5,7 @@ import { User } from "./user.model";
 import bcryptjs from "bcryptjs";
 import { envVars } from "../../config/env";
 import { JwtPayload } from "jsonwebtoken";
+import { deleteImageFroCloudinary } from "../../config/cloudinary.config";
 
 const createUser = async (payload: Partial<IUser>) => {
   const { email, password, ...rest } = payload;
@@ -90,6 +91,10 @@ const updateUser = async (
     runValidators: true,
   });
 
+  if (payload.picture && isUserExist.picture) {
+    await deleteImageFroCloudinary(isUserExist.picture);
+  }
+
   return newUpdatedUser;
 };
 
@@ -99,7 +104,7 @@ const getAllUsers = async () => {
   return {
     data: users,
     meta: {
-      total: totalUsers,
+      totalDocument: totalUsers,
     },
   };
 };
