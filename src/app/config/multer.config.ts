@@ -8,10 +8,10 @@ const storage = new CloudinaryStorage({
     public_id: (req, file) => {
       const filename = file.originalname
         .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/\./g, "-")
+        .replace(/\s+/g, "-") // Replace spaces with hyphens
+        .replace(/\./g, "-") // Remove file extension
         // eslint-disable-next-line no-useless-escape
-        .replace(/[^a-z0-9\-\.]/g, "");
+        .replace(/[^a-z0-9\-\.]/g, "");  // Remove invalid characters
 
       const extension = file.originalname.split(".").pop();
 
