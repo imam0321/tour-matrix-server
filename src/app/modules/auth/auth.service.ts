@@ -3,11 +3,10 @@ import AppError from "../../errorHelpers/AppError";
 import { User } from "../user/user.model";
 import httpStatus from "http-status-codes";
 import bcryptjs from "bcryptjs";
-import {
-  createNewAccessTokenWithRefreshToken,
-} from "../../utils/userTokens";
+import { createNewAccessTokenWithRefreshToken } from "../../utils/userTokens";
 import { JwtPayload } from "jsonwebtoken";
 import { envVars } from "../../config/env";
+import { IAuthProvider } from "../user/user.interface";
 
 const getNewAccessToken = async (refreshToken: string) => {
   const newAccessToken = await createNewAccessTokenWithRefreshToken(
@@ -19,7 +18,7 @@ const getNewAccessToken = async (refreshToken: string) => {
   };
 };
 
-const resetPassword = async (
+const changePassword = async (
   decodedToken: JwtPayload,
   oldPassword: string,
   newPassword: string
@@ -43,13 +42,47 @@ const resetPassword = async (
   user!.save();
 };
 
-export const AuthService = {
-  getNewAccessToken,
-  resetPassword,
+const setPassword = async (userId: string, plainPassword: string) => {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not Found");
+  }
+
+  const isGoogleProvider = user?.auths.some(
+    (providerObject) => providerObject.provider === "Google"
+  );
+
+  if (user?.password && isGoogleProvider) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "You have already set your password"
+    );
+  }
+
+  const hashPassword = await bcryptjs.hash(
+    plainPassword,
+    Number(envVars.BCRYPT_SALT_ROUND)
+  );
+
+  const credentialProvider: IAuthProvider = {
+    provider: "Credential",
+    providerId: user?.email,
+  };
+
+  const auths: IAuthProvider[] = [...user.auths, credentialProvider];
+
+  user.password = hashPassword;
+  user.auths = auths;
+
+  await user.save();
 };
 
-
-
+export const AuthService = {
+  getNewAccessToken,
+  changePassword,
+  setPassword,
+};
 
 // const credentialLogin = async (payload: Partial<IUser>) => {
 //   const { email, password } = payload;

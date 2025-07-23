@@ -76,17 +76,33 @@ const getNewAccessToken = catchAsync(
   }
 );
 
-const resetPassword = catchAsync(
+const changePassword = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const decodedToken = req.user;
     const oldPassword = req.body.oldPassword;
     const newPassword = req.body.newPassword;
 
-    await AuthService.resetPassword(
+    await AuthService.changePassword(
       decodedToken as JwtPayload,
       oldPassword,
       newPassword
     );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Password Changed Successfully",
+      data: null,
+    });
+  }
+);
+
+const setPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = req.user as JwtPayload;
+    const { password } = req.body;
+
+    await AuthService.setPassword(decodedToken.userId, password);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -144,6 +160,7 @@ export const AuthController = {
   credentialLogin,
   googleCallbackController,
   getNewAccessToken,
-  resetPassword,
+  changePassword,
+  setPassword,
   logout,
 };

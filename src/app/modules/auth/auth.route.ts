@@ -9,10 +9,17 @@ const router = Router();
 router.post("/login", AuthController.credentialLogin);
 router.post("/refresh-token", AuthController.getNewAccessToken);
 router.post(
-  "/reset-password",
+  "/change-password",
   checkAuth(...Object.values(Role)),
-  AuthController.resetPassword
+  AuthController.changePassword
 );
+router.post(
+  "/set-password",
+  checkAuth(...Object.values(Role)),
+  AuthController.setPassword
+);
+
+
 router.post("/logout", AuthController.logout);
 router.get(
   "/google",
