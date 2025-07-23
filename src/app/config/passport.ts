@@ -7,7 +7,7 @@ import {
 } from "passport-google-oauth20";
 import { envVars } from "./env";
 import { User } from "../modules/user/user.model";
-import { Role } from "../modules/user/user.interface";
+import { IsActive, Role } from "../modules/user/user.interface";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcryptjs from "bcryptjs";
 
@@ -25,10 +25,32 @@ passport.use(
           return done(null, false, { message: "User Not Exist!" });
         }
 
-        const isGoogleAuthenticated = isUserExist.auths.some(providerObjects => providerObjects.provider == "Google");
+        // if (!isUserExist.isVerified) {
+        //   return done(null, false, { message: "User not Verified" });
+        // }
+
+        if (
+          isUserExist.isActive === IsActive.BLOCKED ||
+          isUserExist.isActive === IsActive.INACTIVE
+        ) {
+          return done(null, false, {
+            message: `User ${isUserExist.isActive}!`,
+          });
+        }
+
+        if (isUserExist.isDeleted) {
+          return done(null, false, { message: "User is deleted!" });
+        }
+
+        const isGoogleAuthenticated = isUserExist.auths.some(
+          (providerObjects) => providerObjects.provider == "Google"
+        );
 
         if (isGoogleAuthenticated && !isUserExist.password) {
-          return done(null, false, {message: "You have authenticated through Google. So if you want to login with credentials, then at first login with google and set a password for your Gmail and then you can login with email and password."})
+          return done(null, false, {
+            message:
+              "You have authenticated through Google. So if you want to login with credentials, then at first login with google and set a password for your Gmail and then you can login with email and password.",
+          });
         }
 
         const isPasswordMatched = await bcryptjs.compare(
@@ -40,7 +62,7 @@ passport.use(
           return done(null, false, { message: "Invalid Password!" });
         }
 
-        return done(null, isUserExist)
+        return done(null, isUserExist);
       } catch (error) {
         done(error);
       }
@@ -68,10 +90,29 @@ passport.use(
           done(null, false, { message: "Email not found" });
         }
 
-        let user = await User.findOne({ email });
+        let isUserExist = await User.findOne({ email });
 
-        if (!user) {
-          user = await User.create({
+        if (isUserExist) {
+          // if (!isUserExist.isVerified) {
+          //   return done(null, false, { message: "User not Verified" });
+          // }
+
+          if (
+            isUserExist.isActive === IsActive.BLOCKED ||
+            isUserExist.isActive === IsActive.INACTIVE
+          ) {
+            return done(null, false, {
+              message: `User ${isUserExist.isActive}!`,
+            });
+          }
+
+          if (isUserExist.isDeleted) {
+            return done(null, false, { message: "User is deleted!" });
+          }
+        }
+
+        if (!isUserExist) {
+          isUserExist = await User.create({
             name: profile.displayName,
             email: profile.emails?.[0].value,
             picture: profile.photos?.[0].value,
@@ -85,9 +126,9 @@ passport.use(
             ],
           });
 
-          return done(null, user);
+          return done(null, isUserExist);
         }
-        return done(null, user);
+        return done(null, isUserExist);
       } catch (error) {
         return done(error);
       }

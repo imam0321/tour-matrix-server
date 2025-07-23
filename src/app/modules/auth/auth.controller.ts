@@ -113,6 +113,22 @@ const setPassword = catchAsync(
   }
 );
 
+const forgetPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = req.user as JwtPayload;
+    const { password } = req.body;
+
+    await AuthService.setPassword(decodedToken.userId, password);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Password set Successfully",
+      data: null,
+    });
+  }
+);
+
 const logout = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     res.clearCookie("accessToken", {
@@ -162,5 +178,6 @@ export const AuthController = {
   getNewAccessToken,
   changePassword,
   setPassword,
+  forgetPassword,
   logout,
 };

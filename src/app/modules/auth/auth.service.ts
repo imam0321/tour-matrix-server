@@ -78,10 +78,47 @@ const setPassword = async (userId: string, plainPassword: string) => {
   await user.save();
 };
 
+const forgetPassword = async (userId: string, plainPassword: string) => {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not Found");
+  }
+
+  const isGoogleProvider = user?.auths.some(
+    (providerObject) => providerObject.provider === "Google"
+  );
+
+  if (user?.password && isGoogleProvider) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "You have already set your password"
+    );
+  }
+
+  const hashPassword = await bcryptjs.hash(
+    plainPassword,
+    Number(envVars.BCRYPT_SALT_ROUND)
+  );
+
+  const credentialProvider: IAuthProvider = {
+    provider: "Credential",
+    providerId: user?.email,
+  };
+
+  const auths: IAuthProvider[] = [...user.auths, credentialProvider];
+
+  user.password = hashPassword;
+  user.auths = auths;
+
+  await user.save();
+};
+
 export const AuthService = {
   getNewAccessToken,
   changePassword,
   setPassword,
+  forgetPassword
 };
 
 // const credentialLogin = async (payload: Partial<IUser>) => {
