@@ -4,11 +4,13 @@ import { createUserZodSchema, updateUserZodSchema } from "./user.validation";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { Role } from "./user.interface";
+import { multerUpload } from "../../config/multer.config";
 
 const router = Router();
 
 router.post(
   "/register",
+  multerUpload.single("file"),
   validateRequest(createUserZodSchema),
   UserController.createUser
 );
@@ -17,10 +19,21 @@ router.get(
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
   UserController.getAllUsers
 );
+router.get(
+  "/me",
+  checkAuth(...Object.values(Role)),
+  UserController.getMe
+);
+router.get(
+  "/:id",
+  checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
+  UserController.getSingleUser
+);
 router.patch(
   "/:id",
-  validateRequest(updateUserZodSchema),
   checkAuth(...Object.values(Role)),
+  multerUpload.single("file"),
+  validateRequest(updateUserZodSchema),
   UserController.updateUser
 );
 

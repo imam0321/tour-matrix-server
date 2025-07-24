@@ -5,6 +5,7 @@ import { User } from "./user.model";
 import bcryptjs from "bcryptjs";
 import { envVars } from "../../config/env";
 import { JwtPayload } from "jsonwebtoken";
+import { deleteImageFroCloudinary } from "../../config/cloudinary.config";
 
 const createUser = async (payload: Partial<IUser>) => {
   const { email, password, ...rest } = payload;
@@ -90,17 +91,35 @@ const updateUser = async (
     runValidators: true,
   });
 
+  if (payload.picture && isUserExist.picture) {
+    await deleteImageFroCloudinary(isUserExist.picture);
+  }
+
   return newUpdatedUser;
 };
 
 const getAllUsers = async () => {
-  const users = await User.find({});
+  const users = await User.find({}).select("-password");
   const totalUsers = await User.countDocuments();
   return {
     data: users,
     meta: {
-      total: totalUsers,
+      totalDocument: totalUsers,
     },
+  };
+};
+
+const getSingleUser = async (userId: string) => {
+  const user = await User.findById(userId).select("-password");
+  return {
+    data: user,
+  };
+};
+
+const getMe = async (userId: string) => {
+  const myInfo = await User.findById(userId).select("-password");
+  return {
+    data: myInfo,
   };
 };
 
@@ -108,4 +127,6 @@ export const UserService = {
   createUser,
   getAllUsers,
   updateUser,
+  getSingleUser,
+  getMe,
 };

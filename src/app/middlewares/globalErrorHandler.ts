@@ -8,8 +8,9 @@ import { handlerDuplicateError } from "../helpers/handleDuplicateError";
 import { handleCastError } from "../helpers/handleCastError";
 import { handlerZodError } from "../helpers/handlerZodError";
 import { handlerValidationError } from "../helpers/handlerValidationError";
+import { deleteImageFroCloudinary } from "../config/cloudinary.config";
 
-export const globalErrorHandler = (
+export const globalErrorHandler = async (
   error: any,
   req: Request,
   res: Response,
@@ -18,6 +19,18 @@ export const globalErrorHandler = (
   if (envVars.NODE_ENV === "development") {
     // eslint-disable-next-line no-console
     console.log(error);
+  }
+
+  if (req.file) {
+    await deleteImageFroCloudinary(req.file.path);
+  }
+
+  if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+    const imageUrl = (req.files as Express.Multer.File[]).map(
+      (file) => file.path
+    );
+
+    await Promise.all(imageUrl.map((url) => deleteImageFroCloudinary(url)));
   }
 
   let statusCode = 500;
