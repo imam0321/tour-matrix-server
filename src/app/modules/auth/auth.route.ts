@@ -23,6 +23,11 @@ router.post(
   "/forget-password",
   AuthController.forgetPassword
 );
+router.post(
+  "/reset-password",
+  checkAuth(...Object.values(Role)),
+  AuthController.resetPassword
+);
 
 router.post("/logout", AuthController.logout);
 router.get(

@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import nodemailer from "nodemailer";
 import { envVars } from "../config/env";
+import path from "path";
+import ejs from "ejs";
+import AppError from "../errorHelpers/AppError";
 
 const transporter = nodemailer.createTransport({
   host: envVars.EMAIL_SENDER.SMTP_HOST,
@@ -8,39 +11,44 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: envVars.EMAIL_SENDER.SMTP_USER,
-    pass: envVars.EMAIL_SENDER.SMTP_PASS
+    pass: envVars.EMAIL_SENDER.SMTP_PASS,
   },
-
 });
 
 interface SendEmailOptions {
-  to: string,
-  subject: string,
-  template: string,
-  templateData? : Record<string, any>,
-  attachments? : {
-    filename: string,
-    content: Buffer | string,
-    contentType: string
-  }[]
+  to: string;
+  subject: string;
+  templateName: string;
+  templateData?: Record<string, any>;
+  attachments?: {
+    filename: string;
+    content: Buffer | string;
+    contentType: string;
+  }[];
 }
 
-const sendEmail = async (
- { to,
+export const sendEmail = async ({
+  to,
   subject,
-  template,
+  templateName,
   templateData,
-  attachments}: SendEmailOptions
-)=> {
-  const info = await transporter.sendMail({
-    from: envVars.EMAIL_SENDER.SMTP_FROM,
-    to: to,
-    subject: subject,
-    html: template,
-    attachments: attachments?.map(attachment => ({
-      filename: attachment.filename,
-      content: attachment.content,
-      contentType: attachment.contentType
-    }))
-  })
-}
+  attachments,
+}: SendEmailOptions) => {
+  try {
+    const templatePath = path.join(__dirname, `templates/${templateName}.ejs`);
+    const html = await ejs.renderFile(templatePath, templateData);
+    await transporter.sendMail({
+      from: envVars.EMAIL_SENDER.SMTP_FROM,
+      to: to,
+      subject: subject,
+      html: html,
+      attachments: attachments?.map((attachment) => ({
+        filename: attachment.filename,
+        content: attachment.content,
+        contentType: attachment.contentType,
+      })),
+    });
+  } catch (error: any) {
+    throw new AppError(401, "Email error", error.message);
+  }
+};

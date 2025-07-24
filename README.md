@@ -45,7 +45,7 @@ package :
   npm i multer-storage-cloudinary or  npm i multer-storage-cloudinary --force
 10. Node Mailer
   npm i nodemailer
-  npm install --save @types/nodemailer
+  npm i -D @types/nodemailer
 11. EJS
   npm i ejs
-  
+  npm i -D @types/ejs

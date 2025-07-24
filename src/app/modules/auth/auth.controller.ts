@@ -115,15 +115,35 @@ const setPassword = catchAsync(
 
 const forgetPassword = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const decodedToken = req.user as JwtPayload;
-    const { password } = req.body;
+    const { email } = req.body;
 
-    await AuthService.setPassword(decodedToken.userId, password);
+    await AuthService.forgetPassword(email);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Password set Successfully",
+      message: "Email send Successfully",
+      data: null,
+    });
+  }
+);
+
+const resetPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = (req.user)  as JwtPayload;
+    console.log(decodedToken)
+    const { id, newPassword } = req.body;
+
+    await AuthService.resetPassword(
+      decodedToken,
+      id,
+      newPassword
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Password reset Successfully",
       data: null,
     });
   }
@@ -179,5 +199,6 @@ export const AuthController = {
   changePassword,
   setPassword,
   forgetPassword,
+  resetPassword,
   logout,
 };
