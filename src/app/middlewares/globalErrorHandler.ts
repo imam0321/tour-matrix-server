@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express";
-import { envVars } from "../config/env";
+import { envVars } from "../config/env.config";
 import AppError from "../errorHelpers/AppError";
 import { TErrorSources } from "../interfaces/error.types";
 import { handlerDuplicateError } from "../helpers/handleDuplicateError";

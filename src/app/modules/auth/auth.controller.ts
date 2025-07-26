@@ -8,7 +8,7 @@ import AppError from "../../errorHelpers/AppError";
 import { setAuthCookie } from "../../utils/setCookies";
 import { JwtPayload } from "jsonwebtoken";
 import { createUserTokens } from "../../utils/userTokens";
-import { envVars } from "../../config/env";
+import { envVars } from "../../config/env.config";
 import passport from "passport";
 import catchAsync from "../../utils/catchAsync";
 
@@ -130,14 +130,10 @@ const forgetPassword = catchAsync(
 
 const resetPassword = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const decodedToken = (req.user)  as JwtPayload;
+    const decodedToken = req.user as JwtPayload;
     const { id, newPassword } = req.body;
 
-    await AuthService.resetPassword(
-      decodedToken,
-      id,
-      newPassword
-    );
+    await AuthService.resetPassword(decodedToken, id, newPassword);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,

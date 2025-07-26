@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import { envVars } from "./env";
+import { envVars } from "./env.config";
 import AppError from "../errorHelpers/AppError";
 
 cloudinary.config({
@@ -18,7 +18,7 @@ export const deleteImageFroCloudinary = async (url: string) => {
       const public_id = match[1];
       await cloudinary.uploader.destroy(public_id);
     }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new AppError(401, "Cloudinary image deletion failed", error.message);
   }

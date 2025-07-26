@@ -3,7 +3,7 @@ import { AuthController } from "./auth.controller";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { Role } from "../user/user.interface";
 import passport from "passport";
-import { envVars } from "../../config/env";
+import { envVars } from "../../config/env.config";
 
 const router = Router();
 
@@ -19,10 +19,7 @@ router.post(
   checkAuth(...Object.values(Role)),
   AuthController.setPassword
 );
-router.post(
-  "/forget-password",
-  AuthController.forgetPassword
-);
+router.post("/forget-password", AuthController.forgetPassword);
 router.post(
   "/reset-password",
   checkAuth(...Object.values(Role)),

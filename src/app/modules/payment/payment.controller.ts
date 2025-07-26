@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status-codes";
 import { PaymentService } from "./payment.service";
-import { envVars } from "../../config/env";
+import { envVars } from "../../config/env.config";
 
 const initPayment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
