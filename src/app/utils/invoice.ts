@@ -89,7 +89,7 @@ export const generatePdf = async (
         .font("Helvetica-Bold")
         .fontSize(12)
         .fillColor("#333")
-        .text(`Total Amount: $${invoiceData.totalAmount.toFixed(2)}`)
+        .text(`Total Amount: ${invoiceData.totalAmount.toFixed(2)}`)
         .font("Helvetica")
         .moveDown();
 
