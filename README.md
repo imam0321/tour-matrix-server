@@ -53,3 +53,6 @@ package :
     npm i -D @types/ejs
 12. Redis
     npm install redis
+13. PDFKit
+   npm i pdfkit
+   npm i @types/pdfkit
