@@ -3,6 +3,7 @@
 This is a Modular MVC Pattern backend.
 
 #### start installation
+
 ```
 npm init -y
 
@@ -20,32 +21,35 @@ npm install --save-dev eslint @eslint/js typescript typescript-eslint
 ```
 
 package :
-1. httpStatus 
- npm i http-status-codes
+
+1. httpStatus
+   npm i http-status-codes
 2. bcryptjs
- npm i bcryptjs
- npm i -D @types/bcryptjs
+   npm i bcryptjs
+   npm i -D @types/bcryptjs
 3. cookie parser
-  npm i cookie-parser
-  npm i -D @types/cookie-parser
+   npm i cookie-parser
+   npm i -D @types/cookie-parser
 4. Passport.js
-  npm i passport passport-local passport-google-oauth20
-  npm i -D @types/passport @types/passport-local @types/passport-google-oauth20
+   npm i passport passport-local passport-google-oauth20
+   npm i -D @types/passport @types/passport-local @types/passport-google-oauth20
 5. Express session
-  npm i express-session
-  npm i -D @types/express-session
+   npm i express-session
+   npm i -D @types/express-session
 6. Axios
-  npm i axios
+   npm i axios
 7. Multer
-  npm i multer 
-  npm install --save @types/multer
+   npm i multer
+   npm install --save @types/multer
 8. Cloudinary
-  npm i cloudinary
+   npm i cloudinary
 9. Multer Storage Cloudinary
-  npm i multer-storage-cloudinary or  npm i multer-storage-cloudinary --force
+   npm i multer-storage-cloudinary or npm i multer-storage-cloudinary --force
 10. Node Mailer
-  npm i nodemailer
-  npm i -D @types/nodemailer
+    npm i nodemailer
+    npm i -D @types/nodemailer
 11. EJS
-  npm i ejs
-  npm i -D @types/ejs
+    npm i ejs
+    npm i -D @types/ejs
+12. Redis
+    npm install redis
