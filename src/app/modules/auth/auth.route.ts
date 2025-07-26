@@ -3,7 +3,7 @@ import { AuthController } from "./auth.controller";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { Role } from "../user/user.interface";
 import passport from "passport";
-import { envVars } from "../../config/env.config";
+import { envVars } from "../../config/env";
 
 const router = Router();
 

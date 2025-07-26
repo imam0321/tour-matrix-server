@@ -5,7 +5,7 @@ import httpStatus from "http-status-codes";
 import bcryptjs from "bcryptjs";
 import { createNewAccessTokenWithRefreshToken } from "../../utils/userTokens";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { envVars } from "../../config/env.config";
+import { envVars } from "../../config/env";
 import { IAuthProvider, IsActive } from "../user/user.interface";
 import { sendEmail } from "../../utils/sendEmail";
 

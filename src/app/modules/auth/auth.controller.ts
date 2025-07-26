@@ -8,7 +8,7 @@ import AppError from "../../errorHelpers/AppError";
 import { setAuthCookie } from "../../utils/setCookies";
 import { JwtPayload } from "jsonwebtoken";
 import { createUserTokens } from "../../utils/userTokens";
-import { envVars } from "../../config/env.config";
+import { envVars } from "../../config/env";
 import passport from "passport";
 import catchAsync from "../../utils/catchAsync";
 

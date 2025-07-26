@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import AppError from "../errorHelpers/AppError";
 import { verifyToken } from "../utils/jwt";
-import { envVars } from "../config/env.config";
+import { envVars } from "../config/env";
 import { User } from "../modules/user/user.model";
 import { IsActive } from "../modules/user/user.interface";
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
-import { envVars } from "../../config/env.config";
+import { envVars } from "../../config/env";
 import { ISSLCommerz } from "./sslCommerz.interface";
 import httpStatus from "http-status-codes";
 import AppError from "../../errorHelpers/AppError";

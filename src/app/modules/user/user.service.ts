@@ -3,7 +3,7 @@ import AppError from "../../errorHelpers/AppError";
 import { IAuthProvider, IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 import bcryptjs from "bcryptjs";
-import { envVars } from "../../config/env.config";
+import { envVars } from "../../config/env";
 import { JwtPayload } from "jsonwebtoken";
 import { deleteImageFroCloudinary } from "../../config/cloudinary.config";
 
