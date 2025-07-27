@@ -7,7 +7,7 @@ import { StatsService } from "./stats.service";
 
 const getUserStats = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = await StatsService.getUserStats()
+    const result = await StatsService.getUserStats();
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -16,20 +16,21 @@ const getUserStats = catchAsync(
     });
   }
 );
+
 const getTourStats = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-
+    const result = await StatsService.getTourStats();
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "",
-      data: null,
+      message: "Tour Stats Retrieved Successfully",
+      data: result,
     });
   }
 );
+
 const getBookingStats = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -38,6 +39,7 @@ const getBookingStats = catchAsync(
     });
   }
 );
+
 const getPaymentStats = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     sendResponse(res, {
@@ -49,12 +51,9 @@ const getPaymentStats = catchAsync(
   }
 );
 
-
-
-
-export const StatsController ={
+export const StatsController = {
   getUserStats,
   getTourStats,
   getBookingStats,
   getPaymentStats,
-}
+};
