@@ -36,11 +36,13 @@ const getAllBookings = catchAsync(
   }
 );
 
-const getUserBookings = catchAsync(
+const getMyBookings = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = {};
+    const decodedToken = req.user as JwtPayload;
+    const result = await BookingService.getMyBookings(decodedToken.userId);
+
     sendResponse(res, {
-      statusCode: httpStatus.CREATED,
+      statusCode: httpStatus.OK,
       success: true,
       message: "Bookings Retrieved",
       data: result,
@@ -60,13 +62,14 @@ const getSingleBooking = catchAsync(
   }
 );
 
+// TODO 
 const updateBookingStatus = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const result = {};
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
-      message: "Booking Created",
+      message: "Booking Updated Successfully",
       data: result,
     });
   }
@@ -75,7 +78,7 @@ const updateBookingStatus = catchAsync(
 export const BookingController = {
   createBooking,
   getAllBookings,
-  getUserBookings,
+  getMyBookings,
   getSingleBooking,
   updateBookingStatus,
 };

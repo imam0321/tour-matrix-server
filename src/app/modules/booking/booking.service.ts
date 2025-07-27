@@ -114,10 +114,9 @@ const getAllBookings = async () => {
   };
 };
 
-const getUserBookings = async () => {
-  const booking = {};
-
-  return booking;
+const getMyBookings = async (userId: string) => {
+  const myBooking = await Booking.find({user: userId});
+  return { userBooking: myBooking };
 };
 
 const getSingleBooking = async (bookingId: string) => {
@@ -125,6 +124,7 @@ const getSingleBooking = async (bookingId: string) => {
   return booking;
 };
 
+// TODO 
 const updateBookingStatus = async () => {
   const booking = {};
 
@@ -134,7 +134,7 @@ const updateBookingStatus = async () => {
 export const BookingService = {
   createBooking,
   getAllBookings,
-  getUserBookings,
+  getMyBookings,
   getSingleBooking,
   updateBookingStatus,
 };
