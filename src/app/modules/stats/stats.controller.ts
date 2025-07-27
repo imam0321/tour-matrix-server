@@ -43,11 +43,12 @@ const getBookingStats = catchAsync(
 
 const getPaymentStats = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    const result = await StatsService.getPaymentStats();
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "",
-      data: null,
+      message: "Payment Stats Retrieved Successfully",
+      data: result,
     });
   }
 );

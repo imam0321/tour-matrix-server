@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { sevenDaysAgo, thirtyDaysAgo } from "../../utils/formatDate";
 import { Booking } from "../booking/booking.model";
+import { Payment } from "../payment/payment.model";
 import { Tour } from "../tour/tour.model";
 import { IsActive } from "../user/user.interface";
 import { User } from "../user/user.model";
-
-const now = new Date();
-const sevenDaysAgo = new Date(now).setDate(now.getDate() - 7);
-const thirtyDaysAgo = new Date(now).setDate(now.getDate() - 30);
 
 const getUserStats = async () => {
   const totalUsersPromise = User.countDocuments();
@@ -273,7 +271,32 @@ const getBookingStats = async () => {
 };
 
 const getPaymentStats = async () => {
-  return;
+  const avgPaymentAmountPromise = Payment.aggregate([
+    {
+      $group: {
+        _id: null,
+        avgPaymentAmount: { $avg: "$amount" },
+      },
+    },
+  ]);
+
+  const paymentGateWayDataPromise = Payment.aggregate([
+    {
+      $group: {
+        _id: {
+          $ifNull: ["$paymentGatewayData.status", "UNKNOWN"],
+        },
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const [avgPaymentAmount, paymentGateWayData] = await Promise.all([
+    avgPaymentAmountPromise,
+    paymentGateWayDataPromise,
+  ]);
+
+  return { avgPaymentAmount, paymentGateWayData };
 };
 
 export const StatsService = {
