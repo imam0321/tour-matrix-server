@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Booking } from "../booking/booking.model";
 import { Tour } from "../tour/tour.model";
 import { IsActive } from "../user/user.interface";
@@ -182,7 +183,93 @@ const getTourStats = async () => {
 };
 
 const getBookingStats = async () => {
-  return;
+  const totalBookingsPromise = Booking.countDocuments();
+
+  const totalBookingByStatusPromise = Booking.aggregate([
+    {
+      $group: {
+        _id: "$status",
+        bookingCount: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const bookingsPerTourPromise = Booking.aggregate([
+    {
+      $group: { _id: "$tour", bookingCount: { $sum: 1 } },
+    },
+    {
+      $sort: { bookingCount: -1 },
+    },
+    {
+      $limit: 10,
+    },
+    {
+      $lookup: {
+        from: "tours",
+        localField: "_id",
+        foreignField: "_id",
+        as: "tour",
+      },
+    },
+    { $unwind: "$tour" },
+    {
+      $project: {
+        bookingCount: 1,
+        _id: 1,
+        "tour.title": 1,
+        "tour.slug": 1,
+      },
+    },
+  ]);
+
+  const avgGuestCountPerBookingPromise = Booking.aggregate([
+    {
+      $group: {
+        _id: null,
+        avgGuestCount: { $avg: "$guestCount" },
+      },
+    },
+  ]);
+
+  const bookingLast7DaysPromise = Booking.countDocuments({
+    createdAt: { $gte: sevenDaysAgo },
+  });
+  const bookingLast30DaysPromise = Booking.countDocuments({
+    createdAt: { $gte: thirtyDaysAgo },
+  });
+
+  const totalBookingByUniqueUsersPromise = Booking.distinct("user").then(
+    (user: any) => user.length
+  );
+
+  const [
+    totalBookings,
+    totalBookingByStatus,
+    bookingsPerTour,
+    avgGuestCountPerBooking,
+    bookingLast7Days,
+    bookingLast30Days,
+    totalBookingByUniqueUsers,
+  ] = await Promise.all([
+    totalBookingsPromise,
+    totalBookingByStatusPromise,
+    bookingsPerTourPromise,
+    avgGuestCountPerBookingPromise,
+    bookingLast7DaysPromise,
+    bookingLast30DaysPromise,
+    totalBookingByUniqueUsersPromise,
+  ]);
+
+  return {
+    totalBookings,
+    totalBookingByStatus,
+    bookingsPerTour,
+    avgGuestCountPerBooking: avgGuestCountPerBooking[0].avgGuestCount,
+    bookingLast7Days,
+    bookingLast30Days,
+    totalBookingByUniqueUsers,
+  };
 };
 
 const getPaymentStats = async () => {

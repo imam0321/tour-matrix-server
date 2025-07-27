@@ -31,11 +31,12 @@ const getTourStats = catchAsync(
 
 const getBookingStats = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    const result = await StatsService.getBookingStats();
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "",
-      data: null,
+      message: "Booking Stats Retrieved Successfully",
+      data: result,
     });
   }
 );
