@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Invoice | Tour Matrix</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        color: #2c3e50;
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 40px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 28px;
+        color: #2980b9;
+      }
+
+      .brand {
+        font-size: 14px;
+        color: #888;
+      }
+
+      section {
+        margin-bottom: 20px;
+      }
+
+      .row {
+        margin-bottom: 12px;
+        font-size: 16px;
+      }
+
+      .row span {
+        font-weight: 600;
+        color: #34495e;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .footer a {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .footer a:hover {
+        background-color: #217dbb;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Invoice for Booking</h1>
+      <p class="brand">Tour Matrix</p>
+    </header>
+
+    <section>
+      <div class="row"><span>User Name:</span> <%= userName %></div>
+      <div class="row"><span>Tour Title:</span> <%= tourTitle %></div>
+      <div class="row"><span>Guest Count:</span> <%= guestCount %></div>
+      <div class="row"><span>Payment ID:</span> <%= transactionId %></div>
+      <div class="row"><span>Amount Paid:</span> <%= totalAmount %></div>
+      <div class="row">
+        <span>Booking Date:</span>
+        <%= new Date(bookingData).toLocaleDateString('en-GB', { day: '2-digit',
+        month: 'long', year: 'numeric' }) %>
+      </div>
+      <div class="footer">
+        <p>Thank you for choosing Tour Matrix!</p>
+      </div>
+    </section>
+  </body>
+</html>

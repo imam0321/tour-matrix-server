@@ -23,6 +23,7 @@ interface EnvConfig {
     SSL_STORE_PASS: string;
     SSL_PAYMENT_API: string;
     SSL_VALIDATION_API: string;
+    SSL_IPN_URL: string;
     SSL_SUCCESS_FRONTEND_URL: string;
     SSL_FAIL_FRONTEND_URL: string;
     SSL_CANCEL_FRONTEND_URL: string;
@@ -41,7 +42,13 @@ interface EnvConfig {
     SMTP_USER: string;
     SMTP_PASS: string;
     SMTP_FROM: string;
-  }
+  };
+  REDIS: {
+    REDIS_HOST: string;
+    REDIS_PORT: string;
+    REDIS_USERNAME: string;
+    REDIS_PASSWORD: string;
+  };
 }
 
 const loadEnvVariables = (): EnvConfig => {
@@ -65,6 +72,7 @@ const loadEnvVariables = (): EnvConfig => {
     "SSL_STORE_PASS",
     "SSL_PAYMENT_API",
     "SSL_VALIDATION_API",
+    "SSL_IPN_URL",
     "SSL_SUCCESS_FRONTEND_URL",
     "SSL_FAIL_FRONTEND_URL",
     "SSL_CANCEL_FRONTEND_URL",
@@ -75,10 +83,14 @@ const loadEnvVariables = (): EnvConfig => {
     "CLOUDINARY_CLOUD_API_KEY",
     "CLOUDINARY_CLOUD_API_SECRET",
     "SMTP_HOST",
-"SMTP_POST",
-"SMTP_USER",
-"SMTP_PASS",
-"SMTP_FROM",
+    "SMTP_POST",
+    "SMTP_USER",
+    "SMTP_PASS",
+    "SMTP_FROM",
+    "REDIS_HOST",
+    "REDIS_PORT",
+    "REDIS_USERNAME",
+    "REDIS_PASSWORD",
   ];
 
   requiredEnvVariable.forEach((key) => {
@@ -108,6 +120,7 @@ const loadEnvVariables = (): EnvConfig => {
       SSL_STORE_PASS: process.env.SSL_STORE_PASS as string,
       SSL_PAYMENT_API: process.env.SSL_PAYMENT_API as string,
       SSL_VALIDATION_API: process.env.SSL_VALIDATION_API as string,
+      SSL_IPN_URL: process.env.SSL_IPN_URL as string,
       SSL_SUCCESS_FRONTEND_URL: process.env.SSL_SUCCESS_FRONTEND_URL as string,
       SSL_FAIL_FRONTEND_URL: process.env.SSL_FAIL_FRONTEND_URL as string,
       SSL_CANCEL_FRONTEND_URL: process.env.SSL_CANCEL_FRONTEND_URL as string,
@@ -127,7 +140,13 @@ const loadEnvVariables = (): EnvConfig => {
       SMTP_USER: process.env.SMTP_USER as string,
       SMTP_PASS: process.env.SMTP_PASS as string,
       SMTP_FROM: process.env.SMTP_FROM as string,
-    }
+    },
+    REDIS: {
+      REDIS_HOST: process.env.REDIS_HOST as string,
+      REDIS_PORT: process.env.REDIS_PORT as string,
+      REDIS_USERNAME: process.env.REDIS_USERNAME as string,
+      REDIS_PASSWORD: process.env.REDIS_PASSWORD as string,
+    },
   };
 };
 

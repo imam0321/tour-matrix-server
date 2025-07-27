@@ -20,7 +20,7 @@ router.get("/",
 
 router.get("/my-bookings",
     checkAuth(...Object.values(Role)),
-    BookingController.getUserBookings
+    BookingController.getMyBookings
 );
 
 router.get("/:bookingId",
@@ -28,6 +28,7 @@ router.get("/:bookingId",
     BookingController.getSingleBooking
 );
 
+// TODO 
 router.patch("/:bookingId/status",
     checkAuth(...Object.values(Role)),
     validateRequest(updateBookingStatusZodSchema),

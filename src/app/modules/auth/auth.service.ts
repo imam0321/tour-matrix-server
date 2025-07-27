@@ -146,10 +146,7 @@ const resetPassword = async (
     Number(envVars.BCRYPT_SALT_ROUND)
   );
 
-  isUserExist.password = await bcryptjs.hash(
-    hashPassword,
-    Number(envVars.BCRYPT_SALT_ROUND)
-  );
+  isUserExist.password = hashPassword;
 
   isUserExist.save();
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { IAuthProvider, IUser } from "./../modules/user/user.interface";
 import bcryptjs from "bcryptjs";
 import { envVars } from "../config/env";
