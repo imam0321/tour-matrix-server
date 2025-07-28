@@ -4,9 +4,11 @@
   "description": "This is a Modular MVC Pattern backend.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "build": "tsc",
     "lint": "npx eslint ./src",
-    "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@types/pdfkit": "^0.17.2",

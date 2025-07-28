@@ -53,7 +53,7 @@ const successPayment = async (query: Record<string, string>) => {
     const updatedPayment = await Payment.findOneAndUpdate(
       { transactionId: query.transactionId },
       { status: PAYMENT_STATUS.PAID },
-      { runValidators: true, session }
+      { new: true, runValidators: true, session }
     );
 
     if (!updatedPayment) {
@@ -61,7 +61,7 @@ const successPayment = async (query: Record<string, string>) => {
     }
 
     const updatedBooking = await Booking.findByIdAndUpdate(
-      updatedPayment?.booking,
+      updatedPayment.booking,
       { status: BOOKING_STATUS.COMPLETE },
       { new: true, runValidators: true, session }
     )
@@ -95,15 +95,15 @@ const successPayment = async (query: Record<string, string>) => {
     await Payment.findByIdAndUpdate(
       updatedPayment._id,
       {
-        invoiceUrl: cloudinaryResult?.secure_url,
+        invoiceUrl: cloudinaryResult.secure_url,
       },
       { runValidators: true, session }
     );
 
     await sendEmail({
-      to: (updatedBooking?.user as unknown as IUser).email,
+      to: (updatedBooking.user as unknown as IUser).email,
       subject: "Your Booking Invoice from Tour Matrix",
-      templateName: "Invoice",
+      templateName: "invoice",
       templateData: invoiceData,
       attachments: [
         {
@@ -120,7 +120,8 @@ const successPayment = async (query: Record<string, string>) => {
   } catch (error: any) {
     await session.abortTransaction();
     session.endSession();
-    throw new AppError(httpStatus.BAD_REQUEST, error.message);
+    // throw new AppError(httpStatus.BAD_REQUEST, error.message);
+    throw error;
   }
 };
 

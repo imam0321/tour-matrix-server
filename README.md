@@ -1,58 +1,60 @@
-# Tour Matrix Server
+# 🧳 Tour Matrix Server
 
-This is a Modular MVC Pattern backend.
+Tour Matrix Server is a robust and scalable backend application built with Node.js, Express.js, and TypeScript, designed to power a travel and tour booking platform. It provides RESTful APIs that support multiple user roles — including users, guides, admins, and super admins — enabling seamless management of tour listings, bookings, user roles, and payments.
 
-#### start installation
+The system follows a Modular MVC Architecture, ensuring a clear separation of concerns and making the application easy to scale, maintain, and extend.
 
+## 🚀 Features
+
+- 🔐 User Authentication & Authorization (JWT-based)
+- 🔗 Social Authentication with Passport.js
+- 📱 OTP Verification
+- 👥 Role-based access (Super_Admin & Admin & User & Guides)
+- 📅 Tour Management (Create, Update, Delete, View)
+- 🧾 Booking Management
+- 💳 Payment Integration (SSLCommerz)
+- 📊 Admin Dashboard APIs
+- 🌐 Secure RESTful API Structure
+- 🧼 Clean Modular MVC Architecture
+- ✅ Centralized Error Handling
+
+---
+
+## 🏗️ Tech Stack
+
+- Typescript
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- JWT
+- Passport.js
+- SSLCommerz
+- Redis
+
+---
+
+## 🛠️ Installation & Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/imam0321/tour-matrix-server.git
+cd tour-matrix-server
+
+npm install
 ```
-npm init -y
 
-npm i -D typescript
+Create a .env file in the root directory and configure necessary secret keys
 
-tsc --init
-
-npm i express mongoose zod jsonwebtoken dotenv cors
-
-npm i -D ts-node-dev @types/express @types/jsonwebtoken @types/dotenv @types/cors
-
-npm install --save-dev eslint @eslint/js typescript typescript-eslint
-
-"dev": "ts-node-dev --respawn --transpile-only ./src/server.ts"
+```bash
+npm run dev
 ```
 
-package :
+---
 
-1. httpStatus
-   npm i http-status-codes
-2. bcryptjs
-   npm i bcryptjs
-   npm i -D @types/bcryptjs
-3. cookie parser
-   npm i cookie-parser
-   npm i -D @types/cookie-parser
-4. Passport.js
-   npm i passport passport-local passport-google-oauth20
-   npm i -D @types/passport @types/passport-local @types/passport-google-oauth20
-5. Express session
-   npm i express-session
-   npm i -D @types/express-session
-6. Axios
-   npm i axios
-7. Multer
-   npm i multer
-   npm install --save @types/multer
-8. Cloudinary
-   npm i cloudinary
-9. Multer Storage Cloudinary
-   npm i multer-storage-cloudinary or npm i multer-storage-cloudinary --force
-10. Node Mailer
-    npm i nodemailer
-    npm i -D @types/nodemailer
-11. EJS
-    npm i ejs
-    npm i -D @types/ejs
-12. Redis
-    npm install redis
-13. PDFKit
-   npm i pdfkit
-   npm i @types/pdfkit
+## 👤 Author
+
+**Imam Hossain**
+
+- 💼 [LinkedIn](https://www.linkedin.com/in/imam0321/)
+- 🐙 [GitHub](https://github.com/imam0321)
