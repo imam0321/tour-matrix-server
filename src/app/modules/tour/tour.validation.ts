@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const createTourTypeZodSchema = z.object({
-  name: z.string(),
+  name: z.string({ invalid_type_error: "Name must be string" }),
 });
 
 export const createTourZodSchema = z.object({

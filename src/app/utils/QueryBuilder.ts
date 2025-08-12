@@ -37,7 +37,7 @@ export class QueryBuilder<T> {
   }
 
   sort(): this {
-    const sort = this.query.sort || "createdAt";
+    const sort = this.query.sort || "-createdAt";
     this.modelQuery = this.modelQuery.sort(sort);
     return this;
   }
