@@ -11,7 +11,7 @@ export const checkAuth =
   (...authRoles: string[]) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const accessToken = req.headers.authorization;
+      const accessToken = req.headers.authorization || req.cookies.accessToken;
 
       if (!accessToken) {
         throw new AppError(httpStatus.UNAUTHORIZED, "No Token found");
@@ -28,9 +28,9 @@ export const checkAuth =
         throw new AppError(httpStatus.BAD_REQUEST, "User Not Exist!");
       }
 
-      // if (!isUserExist.isVerified) {
-      //   throw new AppError(httpStatus.BAD_REQUEST, "User not Verified");
-      // }
+      if (!isUserExist.isVerified) {
+        throw new AppError(httpStatus.BAD_REQUEST, "User not Verified");
+      }
 
       if (
         isUserExist.isActive === IsActive.BLOCKED ||

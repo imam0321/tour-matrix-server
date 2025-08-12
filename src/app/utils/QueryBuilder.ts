@@ -23,7 +23,7 @@ export class QueryBuilder<T> {
   }
 
   search(searchableFiled: string[]): this {
-    const searchTerm = this.query.searchTerm || " ";
+    const searchTerm = this.query.searchTerm || "";
 
     const searchQuery = {
       $or: searchableFiled.map((field) => ({
