@@ -1,5 +1,6 @@
 import { deleteImageFroCloudinary } from "../../config/cloudinary.config";
 import AppError from "../../errorHelpers/AppError";
+import { QueryBuilder } from "../../utils/QueryBuilder";
 import { IDivision } from "./division.interface";
 import { Division } from "./division.model";
 import httpStatus from "http-status-codes";
@@ -29,15 +30,19 @@ const createDivision = async (payload: Partial<IDivision>) => {
   return division;
 };
 
-const getAllDivision = async () => {
-  const division = await Division.find({});
-  const totalDivision = await Division.countDocuments();
+const getAllDivision = async (query: Record<string, string>) => {
+  const queryBuilder = new QueryBuilder(Division.find(), query);
+
+  const divisions = queryBuilder.sort().paginate();
+
+  const [data, meta] = await Promise.all([
+    divisions.build(),
+    queryBuilder.getMeta()
+  ])
 
   return {
-    data: division,
-    meta: {
-      totalDocument: totalDivision,
-    },
+    data,
+    meta
   };
 };
 
