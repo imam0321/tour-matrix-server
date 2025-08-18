@@ -33,7 +33,7 @@ const createDivision = async (payload: Partial<IDivision>) => {
 const getAllDivision = async (query: Record<string, string>) => {
   const queryBuilder = new QueryBuilder(Division.find(), query);
 
-  const divisions = queryBuilder.sort().paginate();
+  const divisions = queryBuilder.sort().fields().paginate();
 
   const [data, meta] = await Promise.all([
     divisions.build(),
