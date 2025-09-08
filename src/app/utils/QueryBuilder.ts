@@ -37,8 +37,10 @@ export class QueryBuilder<T> {
   }
 
   sort(): this {
-    const sort = this.query.sort || "-createdAt";
-    this.modelQuery = this.modelQuery.sort(sort);
+    let sortOption = "-createdAt";
+    if (this.query.sort === "price-low") sortOption = "costFrom";
+    if (this.query.sort === "price-high") sortOption = "-costFrom";
+    this.modelQuery = this.modelQuery.sort(sortOption);
     return this;
   }
 
