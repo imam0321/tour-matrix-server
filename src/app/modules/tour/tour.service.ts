@@ -72,7 +72,7 @@ const createTour = async (payload: ITour) => {
 };
 
 const getAllTours = async (query: Record<string, string>) => {
-  const queryBuilder = new QueryBuilder(Tour.find(), query);
+  const queryBuilder = new QueryBuilder(Tour.find().populate({ path: "division", select: "name" }).populate({ path: "tourType", select: "name" }), query);
 
   const tours = queryBuilder
     .search(tourSearchableFields)

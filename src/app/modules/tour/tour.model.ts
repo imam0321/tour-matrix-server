@@ -24,7 +24,7 @@ const tourSchema = new Schema<ITour>(
     excluded: { type: [String], default: [] },
     amenities: { type: [String], default: [] },
     tourPlan: { type: [String], default: [] },
-    maxGest: { type: Number },
+    maxGuest: { type: Number },
     minAge: { type: Number },
     division: { type: Schema.Types.ObjectId, ref: "Division", required: true },
     tourType: { type: Schema.Types.ObjectId, ref: "TourType", required: true },
