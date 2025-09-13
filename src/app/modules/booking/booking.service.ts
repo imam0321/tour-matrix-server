@@ -115,8 +115,8 @@ const getAllBookings = async () => {
 };
 
 const getMyBookings = async (userId: string) => {
-  const myBooking = await Booking.find({user: userId});
-  return { userBooking: myBooking };
+  const myBooking = await Booking.find({ user: userId }).populate("tour", "title costFrom startDate endDate location").sort({ createdAt: -1 });
+  return myBooking;
 };
 
 const getSingleBooking = async (bookingId: string) => {
