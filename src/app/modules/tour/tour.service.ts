@@ -99,6 +99,10 @@ const updateTour = async (id: string, payload: Partial<ITour>) => {
     throw new AppError(httpStatus.NOT_FOUND, "Tour not found.");
   }
 
+  if (payload.images && payload.images.length === 0) {
+    delete payload.images; 
+  }
+
   if (
     payload.images &&
     payload.images.length > 0 &&
