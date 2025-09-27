@@ -4,6 +4,13 @@ Tour Matrix Server is a robust and scalable backend application built with Node.
 
 The system follows a Modular MVC Architecture, ensuring a clear separation of concerns and making the application easy to scale, maintain, and extend.
 
+## 🔗 Live Link
+
+* **Frontend**: [https://tour-matrix.vercel.app](https://tour-matrix.vercel.app) 
+* **Frontend Repository**: [https://github.com/imam0321/tour-matrix-client](https://github.com/imam0321/tour-matrix-client)
+* **Backend**: [https://tour-matrix-server.vercel.app](https://tour-matrix-server.vercel.app)
+---
+
 ## 🚀 Features
 
 - 🔐 User Authentication & Authorization (JWT-based)

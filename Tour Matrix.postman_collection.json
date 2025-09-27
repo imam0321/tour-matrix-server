@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "fef4658b-8346-4abb-bb7c-2cfd6dda152c",
 		"name": "Tour Matrix",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "36909447"
 	},
 	"item": [
@@ -16,25 +16,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"ashad\",\r\n    \"email\": \"asaduzzamannoor667@gmail.com\",\r\n    \"password\": \"57487228asaduzzamannooR@\"\r\n}",
+							"raw": "{\r\n    \"name\": \"ashad\",\r\n    \"email\": \"asaduzzamanno3or667@gmail.com\",\r\n    \"password\": \"57487228asaduzzamannooR@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/user/register",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"register"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user/register"
 					},
 					"response": []
 				},
@@ -103,18 +92,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/user/688767682193cecaa481b99c",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"688767682193cecaa481b99c"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user/688767682193cecaa481b99c"
 					},
 					"response": []
 				},
@@ -129,18 +107,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/api/v1/user/me",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"me"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user/me"
 					},
 					"response": []
 				},
@@ -155,18 +122,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/api/v1/user/6880de14a6eb343a8bfa46aa",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"6880de14a6eb343a8bfa46aa"
-							]
-						}
+						"url": "{{base_url}}/api/v1/user/6880de14a6eb343a8bfa46aa"
 					},
 					"response": []
 				}
@@ -182,25 +138,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"email\": \"super@gmail.com\",\r\n    // \"password\": \"123456789\"\r\n    \"email\": \"asaduzzamannoor667@gmail.com\",\r\n    \"password\": \"57487228asaduzzamannooR@\"\r\n}",
+							"raw": "{\r\n    \"email\": \"super@gmail.com\",\r\n    \"password\": \"123456789\"\r\n    // \"email\": \"asaduzzamannoor667@gmail.com\",\r\n    // \"password\": \"57487228asaduzzamannooR@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/auth/login",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"login"
-							]
-						}
+						"url": "{{base_url}}/api/v1/auth/login"
 					},
 					"response": []
 				},
@@ -209,18 +154,7 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/v1/auth/refresh-token",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"refresh-token"
-							]
-						}
+						"url": "{{base_url}}/api/v1/auth/refresh-token"
 					},
 					"response": []
 				},
@@ -233,20 +167,7 @@
 							"mode": "raw",
 							"raw": "{\r\n    \"email\": \"imam@gmail.com\",\r\n    \"password\": \"Imam@gmail.com1\"\r\n}"
 						},
-						"url": {
-							"raw": "http://localhost:5000/api/v1/auth/logout",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"logout"
-							]
-						}
+						"url": "http://localhost:5000/api/v1/auth/logout"
 					},
 					"response": []
 				},
@@ -270,18 +191,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/auth/reset-password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"reset-password"
-							]
-						}
+						"url": "{{base_url}}/api/v1/auth/reset-password"
 					},
 					"response": []
 				},
@@ -305,18 +215,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/auth/set-password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"set-password"
-							]
-						}
+						"url": "{{base_url}}/api/v1/auth/set-password"
 					},
 					"response": []
 				},
@@ -334,18 +233,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/auth/forget-password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"forget-password"
-							]
-						}
+						"url": "{{base_url}}/api/v1/auth/forget-password"
 					},
 					"response": []
 				},
@@ -369,18 +257,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/auth/reset-password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"reset-password"
-							]
-						}
+						"url": "{{base_url}}/api/v1/auth/reset-password"
 					},
 					"response": []
 				}
@@ -404,7 +281,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/api/v1/tour/tour-types",
+									"raw": "{{base_url}}/api/v1/tour/tour-types?sort=createdAt",
 									"host": [
 										"{{base_url}}"
 									],
@@ -413,6 +290,17 @@
 										"v1",
 										"tour",
 										"tour-types"
+									],
+									"query": [
+										{
+											"key": "searchTerm",
+											"value": "Beach",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "createdAt"
+										}
 									]
 								}
 							},
@@ -431,26 +319,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Nature Tour\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Nature Tour view\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/tour/tour-types/6879647daaa6e0385b2a8c5d",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"tour",
-										"tour-types",
-										"6879647daaa6e0385b2a8c5d"
-									]
-								}
+								"url": "{{base_url}}/api/v1/tour/tour-types/689632b499017e9da0349df3"
 							},
 							"response": []
 						},
@@ -474,18 +350,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/tour/create-tour-type",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"tour",
-										"create-tour-type"
-									]
-								}
+								"url": "{{base_url}}/api/v1/tour/create-tour-type"
 							},
 							"response": []
 						},
@@ -500,19 +365,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{base_url}}/api/v1/tour/tour-types/687964c8aaa6e0385b2a8c71",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"tour",
-										"tour-types",
-										"687964c8aaa6e0385b2a8c71"
-									]
-								}
+								"url": "{{base_url}}/api/v1/tour/tour-types/687964c8aaa6e0385b2a8c71"
 							},
 							"response": []
 						}
@@ -530,35 +383,15 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "data",
-									"value": "{\n    \"title\": \"Rajshahi Mango Festival Tour-2\",\n    \"description\": \"Explore Rajshahi's famous mango orchards and silk industry.\",\n    \"location\": \"Rajshahi, Bangladesh\",\n    \"costFrom\": 150,\n    \"startDate\": \"2025-09-10T00:00:00.000Z\",\n    \"endDate\": \"2025-09-15T00:00:00.000Z\",\n    \"maxGest\": 20,\n    \"minAge\": 12,\n    \"division\": \"687a9638e86011da325f911e\",\n    \"tourType\": \"687a9520e86011da325f90c5\"\n  }",
-									"type": "text"
-								},
-								{
-									"key": "files",
-									"type": "file",
-									"src": [
-										"/G:/Image/pexels-mateusz-dach-450035.jpg",
-										"/G:/Image/pexels-muffin-creatives-2468773.jpg"
-									]
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Rajshahi Mango Festival Tour\",\r\n    \"description\": \"Explore Rajshahi's famous mango orchards and silk industry.\",\r\n    \"location\": \"Rajshahi, Bangladesh\",\r\n    \"costFrom\": 150,\r\n    \"startDate\": \"2025-09-10T00:00:00.000Z\",\r\n    \"endDate\": \"2025-09-15T00:00:00.000Z\",\r\n    \"maxGest\": 20,\r\n    \"minAge\": 12,\r\n    \"divisionId\": \"68963871600f6a3ba60131e8\",\r\n    \"tourType\": \"6896388e600f6a3ba60131ed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/tour/create",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tour",
-								"create"
-							]
-						}
+						"url": "{{base_url}}/api/v1/tour/create"
 					},
 					"response": []
 				},
@@ -574,26 +407,21 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"location\": \"Rajshahi\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"value": "",
+									"type": "text"
 								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/tour/687a98dec4fc5be13f8d0b73",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tour",
-								"687a98dec4fc5be13f8d0b73"
 							]
-						}
+						},
+						"url": "{{base_url}}/api/v1/tour/68a4c5119959b0c14d196386"
 					},
 					"response": []
 				},
@@ -686,18 +514,7 @@
 							"mode": "raw",
 							"raw": "{\r\n    \"title\": \"Thander tour\",\r\n    \"description\": \"This is a relax tour\",\r\n    \"location\": \"Dhaka\",\r\n    \"division\": \"68795358e14a7de3e742b116\",\r\n    \"tourType\": \"68796492aaa6e0385b2a8c61\",\r\n    \"costFrom\": 200,\r\n    \"startDate\": \"2025-08-25\",\r\n    \"endDate\": \"2025-8-26\"\r\n}"
 						},
-						"url": {
-							"raw": "{{Authorization}}/api/v1/tour/68796cad8102d0c8c1b0bf94",
-							"host": [
-								"{{Authorization}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"tour",
-								"68796cad8102d0c8c1b0bf94"
-							]
-						}
+						"url": "{{Authorization}}/api/v1/tour/68796cad8102d0c8c1b0bf94"
 					},
 					"response": []
 				}
@@ -732,18 +549,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/division/create",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"division",
-								"create"
-							]
-						}
+						"url": "{{base_url}}/api/v1/division/create"
 					},
 					"response": []
 				},
@@ -765,17 +571,7 @@
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"Dhaka\",\r\n    \"description\": \"Dhaka is a beutiful city\"\r\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/division",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"division"
-							]
-						}
+						"url": "{{base_url}}/api/v1/division"
 					},
 					"response": []
 				},
@@ -790,18 +586,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/api/v1/division/dhaka-division",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"division",
-								"dhaka-division"
-							]
-						}
+						"url": "{{base_url}}/api/v1/division/dhaka-division"
 					},
 					"response": []
 				},
@@ -825,18 +610,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{Authorization}}/api/v1/division/68794b1aa7969c41b5380a63",
-							"host": [
-								"{{Authorization}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"division",
-								"68794b1aa7969c41b5380a63"
-							]
-						}
+						"url": "{{Authorization}}/api/v1/division/68794b1aa7969c41b5380a63"
 					},
 					"response": []
 				},
@@ -855,18 +629,7 @@
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"Rongpur\",\r\n    \"description\": \"Rongpur division is great city\"\r\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/division/687fdd0452e42ca0ff0a07bb",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"division",
-								"687fdd0452e42ca0ff0a07bb"
-							]
-						}
+						"url": "{{base_url}}/api/v1/division/687fdd0452e42ca0ff0a07bb"
 					},
 					"response": []
 				}
@@ -895,17 +658,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/booking",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"booking"
-							]
-						}
+						"url": "{{base_url}}/api/v1/booking"
 					},
 					"response": []
 				},
@@ -927,17 +680,7 @@
 							"mode": "raw",
 							"raw": "{\r\n    \"tour\": \"68796be68102d0c8c1b0bf8b\",\r\n    \"guestCount\": 2\r\n}"
 						},
-						"url": {
-							"raw": "{{Authorization}}/api/v1/booking",
-							"host": [
-								"{{Authorization}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"booking"
-							]
-						}
+						"url": "{{Authorization}}/api/v1/booking"
 					},
 					"response": []
 				},
@@ -959,18 +702,7 @@
 							"mode": "raw",
 							"raw": "{\r\n    \"tour\": \"68796be68102d0c8c1b0bf8b\",\r\n    \"guestCount\": 2\r\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/booking/687e638df3db696155feed4e",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"booking",
-								"687e638df3db696155feed4e"
-							]
-						}
+						"url": "{{base_url}}/api/v1/booking/687e638df3db696155feed4e"
 					},
 					"response": []
 				},
@@ -985,18 +717,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/api/v1/booking/my-bookings",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"booking",
-								"my-bookings"
-							]
-						}
+						"url": "{{base_url}}/api/v1/booking/my-bookings"
 					},
 					"response": []
 				}
@@ -1020,19 +741,7 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/payment/init-payment/687e638df3db696155feed4e",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"payment",
-								"init-payment",
-								"687e638df3db696155feed4e"
-							]
-						}
+						"url": "{{base_url}}/api/v1/payment/init-payment/687e638df3db696155feed4e"
 					},
 					"response": []
 				},
@@ -1047,19 +756,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/api/v1/payment/invoice/6887955c410187ff0c96f117",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"payment",
-								"invoice",
-								"6887955c410187ff0c96f117"
-							]
-						}
+						"url": "{{base_url}}/api/v1/payment/invoice/6887955c410187ff0c96f117"
 					},
 					"response": []
 				}
@@ -1088,18 +785,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/otp/send",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"otp",
-								"send"
-							]
-						}
+						"url": "{{base_url}}/api/v1/otp/send"
 					},
 					"response": []
 				},
@@ -1123,18 +809,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/otp/verify",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"otp",
-								"verify"
-							]
-						}
+						"url": "{{base_url}}/api/v1/otp/verify"
 					},
 					"response": []
 				}
@@ -1161,20 +836,7 @@
 							"mode": "raw",
 							"raw": "{\r\n    \"oldPassword\": \"1234567890\",\r\n    \"newPassword\": \"123456789\"\r\n}"
 						},
-						"url": {
-							"raw": "http://localhost:5000/api/v1/stats/user",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"v1",
-								"stats",
-								"user"
-							]
-						}
+						"url": "http://localhost:5000/api/v1/stats/user"
 					},
 					"response": []
 				},
@@ -1189,20 +851,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "http://localhost:5000/api/v1/stats/tour",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"v1",
-								"stats",
-								"tour"
-							]
-						}
+						"url": "http://localhost:5000/api/v1/stats/tour"
 					},
 					"response": []
 				},
@@ -1217,18 +866,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/api/v1/stats/booking",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"stats",
-								"booking"
-							]
-						}
+						"url": "{{base_url}}/api/v1/stats/booking"
 					},
 					"response": []
 				},
@@ -1243,17 +881,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/api/v1/payment",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"payment"
-							]
-						}
+						"url": "{{base_url}}/api/v1/stats/payment"
 					},
 					"response": []
 				}
@@ -1285,13 +913,14 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "https://tour-matrix-server.vercel.app/",
-			"type": "string"
+			"value": "http://localhost:5000"
 		},
 		{
 			"key": "Authorization",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg3Njc2ODIxOTNjZWNhYTQ4MWI5OWMiLCJlbWFpbCI6ImFzYWR1enphbWFubm9vcjY2N0BnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc1MzcyMTM1MywiZXhwIjoxNzUzODA3NzUzfQ.2N7_TtynzMMUhq3vtSVceDVbMGg3w7KYn7cLCJgc6K8",
-			"type": "string"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODdhOTgxZWM0ZmM1YmUxM2Y4ZDBiNDgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzE4OTg0MywiZXhwIjoxNzU3Mjc2MjQzfQ.MJB9BuPMBWZqQh-GKcLt-aMfyQUhICus8RjbC8P0jCY"
+		},
+		{
+			"value": "https://tour-matrix-server.vercel.app/"
 		}
 	]
 }
