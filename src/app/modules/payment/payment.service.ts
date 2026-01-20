@@ -23,12 +23,17 @@ const initPayment = async (bookingId: string) => {
     );
   }
 
-  const booking = await Booking.findById(payment.booking);
+  const booking = await Booking.findById(payment.booking).populate("user");
 
-  const userName = (booking as any).name;
-  const userEmail = (booking as any).email;
-  const userPhone = (booking as any).phone;
-  const userAddress = (booking as any).address;
+  if (!booking) {
+    throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
+  }
+
+  const user = (booking as any).user;
+  const userName = user.name;
+  const userEmail = user.email;
+  const userPhone = user.phone;
+  const userAddress = user.address;
 
   const sslPayload: ISSLCommerz = {
     name: userName,
@@ -72,55 +77,56 @@ const successPayment = async (query: Record<string, string>) => {
       throw new AppError(401, "Booking Not Found");
     }
 
-    const invoiceData: IInvoiceData = {
-      bookingData: updatedBooking.createdAt as Date,
-      guestCount: updatedBooking.guestCount,
-      totalAmount: updatedPayment.amount,
-      tourTitle: (updatedBooking.tour as unknown as ITour).title,
-      transactionId: updatedPayment.transactionId,
-      userName: (updatedBooking.user as unknown as IUser).name,
-    };
-
-    const pdfBuffer = await generatePdf(invoiceData);
-
-    const cloudinaryResult = await uploadBufferToCloudinary(
-      pdfBuffer,
-      "tour-matrix-invoice"
-    );
-
-    if (!cloudinaryResult) {
-      throw new AppError(401, "Error uploading pdf");
-    }
-
-    await Payment.findByIdAndUpdate(
-      updatedPayment._id,
-      {
-        invoiceUrl: cloudinaryResult.secure_url,
-      },
-      { runValidators: true, session }
-    );
-
-    await sendEmail({
-      to: (updatedBooking.user as unknown as IUser).email,
-      subject: "Your Booking Invoice from Tour Matrix",
-      templateName: "invoice",
-      templateData: invoiceData,
-      attachments: [
-        {
-          filename: "tour-matrix-invoice.pdf",
-          content: pdfBuffer,
-          contentType: "application/pdf",
-        },
-      ],
-    });
-
     await session.commitTransaction();
     session.endSession();
+
+    // Start background tasks without awaiting them to prevent 504 Timeout
+    (async () => {
+      try {
+        const invoiceData: IInvoiceData = {
+          bookingData: updatedBooking.createdAt as Date,
+          guestCount: updatedBooking.guestCount,
+          totalAmount: updatedPayment.amount,
+          tourTitle: (updatedBooking.tour as unknown as ITour).title,
+          transactionId: updatedPayment.transactionId,
+          userName: (updatedBooking.user as unknown as IUser).name,
+        };
+
+        const pdfBuffer = await generatePdf(invoiceData);
+
+        const cloudinaryResult = await uploadBufferToCloudinary(
+          pdfBuffer,
+          "tour-matrix-invoice"
+        );
+
+        if (cloudinaryResult) {
+          await Payment.findByIdAndUpdate(updatedPayment._id, {
+            invoiceUrl: cloudinaryResult.secure_url,
+          });
+        }
+
+        await sendEmail({
+          to: (updatedBooking.user as unknown as IUser).email,
+          subject: "Your Booking Invoice from Tour Matrix",
+          templateName: "invoice",
+          templateData: invoiceData,
+          attachments: [
+            {
+              filename: "tour-matrix-invoice.pdf",
+              content: pdfBuffer,
+              contentType: "application/pdf",
+            },
+          ],
+        });
+      } catch (bgError) {
+        console.error("Background task error (Invoice/Email):", bgError);
+      }
+    })();
+
     return { success: true, message: "Payment Completed successfully" };
   } catch (error: any) {
     await session.abortTransaction();
     session.endSession();
-    // throw new AppError(httpStatus.BAD_REQUEST, error.message);
     throw error;
   }
 };

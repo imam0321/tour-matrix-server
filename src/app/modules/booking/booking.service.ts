@@ -72,10 +72,15 @@ const createBooking = async (payload: Partial<IBooking>, userId: string) => {
       .populate("tour", "title costFrom")
       .populate("payment");
 
-    const userName = (updatedBooking as any).name;
-    const userEmail = (updatedBooking as any).email;
-    const userPhone = (updatedBooking as any).phone;
-    const userAddress = (updatedBooking as any).address;
+    if (!updatedBooking) {
+      throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
+    }
+
+    const populatedUser = updatedBooking.user as any;
+    const userName = populatedUser.name;
+    const userEmail = populatedUser.email;
+    const userPhone = populatedUser.phone;
+    const userAddress = populatedUser.address;
 
     const sslPayload: ISSLCommerz = {
       name: userName,
